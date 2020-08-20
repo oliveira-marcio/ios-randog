@@ -32,20 +32,7 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                let imageTask = URLSession.shared.dataTask(with: imageUrl) {
-                    (data, response, error) in
-                    guard let data = data else {
-                        print("No data returned or there was an error.")
-                        return
-                    }
-                    
-                    let downloadedImage = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self.imageView.image = downloadedImage
-                    }
-                }
-                
-                imageTask.resume()
+                DogAPI.requestImageFile(url: imageUrl, completionHandler: self.handleImageFileResponse(image:error:))
                 
             } catch {
                 print(error)
@@ -53,5 +40,11 @@ class ViewController: UIViewController {
         }
         
         apiTask.resume()
+    }
+    
+    func handleImageFileResponse(image: UIImage?, error: Error?) {
+        DispatchQueue.main.async {
+            self.imageView.image = image
+        }
     }
 }
