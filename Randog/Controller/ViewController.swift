@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let randomImageEndpoint = DogAPI.Endpoint.randomImageFromAllDogsCollection.url
         
-        let task = URLSession.shared.dataTask(with: randomImageEndpoint) {
+        let apiTask = URLSession.shared.dataTask(with: randomImageEndpoint) {
             (data, response, error) in
             guard let data = data else {
                 print("No data returned or there was an error.")
@@ -26,12 +26,32 @@ class ViewController: UIViewController {
             let decoder = JSONDecoder()
             do {
                 let imageData = try decoder.decode(DogImage.self, from: data)
-                print(imageData.message)
+                
+                guard let imageUrl = URL(string: imageData.message) else {
+                    print("Error creating image URL.")
+                    return
+                }
+                
+                let imageTask = URLSession.shared.dataTask(with: imageUrl) {
+                    (data, response, error) in
+                    guard let data = data else {
+                        print("No data returned or there was an error.")
+                        return
+                    }
+                    
+                    let downloadedImage = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        self.imageView.image = downloadedImage
+                    }
+                }
+                
+                imageTask.resume()
+                
             } catch {
                 print(error)
             }
         }
         
-        task.resume()
+        apiTask.resume()
     }
 }
