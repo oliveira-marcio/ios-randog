@@ -14,6 +14,7 @@
 		9C7936BC24EE5EAC00B13B18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C7936BB24EE5EAC00B13B18 /* Assets.xcassets */; };
 		9C7936BF24EE5EAC00B13B18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C7936BD24EE5EAC00B13B18 /* LaunchScreen.storyboard */; };
 		9C7936CA24EE5EAC00B13B18 /* RandogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7936C924EE5EAC00B13B18 /* RandogTests.swift */; };
+		9C7936D824EE619B00B13B18 /* DogAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7936D724EE619B00B13B18 /* DogAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		9C7936C524EE5EAC00B13B18 /* RandogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7936C924EE5EAC00B13B18 /* RandogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandogTests.swift; sourceTree = "<group>"; };
 		9C7936CB24EE5EAC00B13B18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C7936D724EE619B00B13B18 /* DogAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		9C7936B124EE5EA900B13B18 /* Randog */ = {
 			isa = PBXGroup;
 			children = (
+				9C7936D624EE618B00B13B18 /* Model */,
 				9C7936D524EE5F1E00B13B18 /* Controller */,
 				9C7936D424EE5EF900B13B18 /* View */,
 				9C7936C024EE5EAC00B13B18 /* Info.plist */,
@@ -113,6 +116,14 @@
 				9C7936B624EE5EA900B13B18 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		9C7936D624EE618B00B13B18 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9C7936D724EE619B00B13B18 /* DogAPI.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +230,7 @@
 				9C7936B724EE5EA900B13B18 /* ViewController.swift in Sources */,
 				9C7936B324EE5EA900B13B18 /* AppDelegate.swift in Sources */,
 				9C7936B524EE5EA900B13B18 /* SceneDelegate.swift in Sources */,
+				9C7936D824EE619B00B13B18 /* DogAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
