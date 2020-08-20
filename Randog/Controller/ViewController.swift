@@ -23,10 +23,10 @@ class ViewController: UIViewController {
                 return
             }
             
+            let decoder = JSONDecoder()
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let url = json["message"] as! String
-                print(url)
+                let imageData = try decoder.decode(DogImage.self, from: data)
+                print(imageData.message)
             } catch {
                 print(error)
             }
