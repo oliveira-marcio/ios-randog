@@ -13,26 +13,36 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickerView: UIPickerView!
     
-    let breeds: [String] = ["greyhound", "poodle", "pug"]
+    var breeds = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
+        
+        DogAPI.requestBreedsList(completionHandler: handleBreedsListResponse(breeds:error:))
     }
     
     func handleRandomImageResponse(dogImage: DogImage?, error: Error?) {
         guard let imageUrl = URL(string: dogImage?.message ?? "") else {
              return
-         }
+        }
          
-         DogAPI.requestImageFile(url: imageUrl, completionHandler: self.handleImageFileResponse(image:error:))
+        DogAPI.requestImageFile(url: imageUrl, completionHandler: self.handleImageFileResponse(image:error:))
     }
     
     func handleImageFileResponse(image: UIImage?, error: Error?) {
         DispatchQueue.main.async {
             self.imageView.image = image
+        }
+    }
+    
+    func handleBreedsListResponse(breeds: [String], error: Error?) {
+        self.breeds = breeds
+        
+        DispatchQueue.main.async {
+            self.pickerView.reloadAllComponents()
         }
     }
     
