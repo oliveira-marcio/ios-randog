@@ -50,6 +50,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-         DogAPI.requestRandomImage(completionHandler: handleRandomImageResponse(dogImage:error:))
+        let breed = self.breeds[row]
+        DogAPI.requestRandomImage(breed: breed, completionHandler: handleRandomImageResponse(dogImage:error:))
     }
 }
