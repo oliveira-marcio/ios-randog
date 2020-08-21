@@ -8,14 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    let breeds: [String] = ["greyhound", "poodle", "pug"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DogAPI.requestRandomImage(completionHandler: handleRandomImageResponse(dogImage:error:))
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
     }
     
     func handleRandomImageResponse(dogImage: DogImage?, error: Error?) {
@@ -30,5 +34,22 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             self.imageView.image = image
         }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.breeds.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.breeds[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+         DogAPI.requestRandomImage(completionHandler: handleRandomImageResponse(dogImage:error:))
     }
 }
